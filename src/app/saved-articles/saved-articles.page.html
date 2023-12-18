@@ -1,0 +1,33 @@
+<!-- saved-articles.page.html -->
+
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+       <ion-button (click)="goToHome()">
+         <ion-icon name="arrow-back"></ion-icon>
+       </ion-button>
+     </ion-buttons>
+     <ion-title>Saved Articles</ion-title>
+     <ion-buttons slot="end">
+       <ion-button (click)="clearSavedArticles()">
+         <ion-icon name="trash"></ion-icon>
+       </ion-button>
+     </ion-buttons>
+  </ion-toolbar>
+ </ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let article of savedArticles">
+    <ion-img [src]="article.urlToImage"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>{{article.publishedAt | date}}</ion-card-subtitle>
+      <ion-card-title>{{article.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{article.description}}
+    </ion-card-content>
+    <div class="button-container">
+    <ion-button (click)="removeArticle(article)">Remove</ion-button>
+    </div>
+  </ion-card>
+</ion-content>

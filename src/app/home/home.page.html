@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="title">
+      WorldNews
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-padding">
+  <ion-item lines="full">
+    <div class="kategorie">
+      <ion-label>{{ selectedCategoriesDisplay }}</ion-label>
+    </div>
+    <ion-select [(ngModel)]="selectedCategories" multiple="true" (ionChange)="onCategoryChange()">
+      <ion-select-option value="business">Business</ion-select-option>
+      <ion-select-option value="entertainment">Entertainment</ion-select-option>
+      <ion-select-option value="general">General</ion-select-option>
+      <ion-select-option value="health">Health</ion-select-option>
+      <ion-select-option value="science">Science</ion-select-option>
+      <ion-select-option value="sports">Sports</ion-select-option>
+      <ion-select-option value="technology">Technology</ion-select-option>
+    </ion-select>
+    <ion-button (click)="goToSavedArticles()">Saved Articles</ion-button>
+  </ion-item>
+
+  <ion-card *ngFor="let article of articles">
+    <ion-img [src]="article.urlToImage"></ion-img>
+    <ion-card-header (click)="article.isDescriptionExpanded = !article.isDescriptionExpanded">
+      <ion-card-subtitle>{{ article.publishedAt | date }}</ion-card-subtitle>
+      <ion-card-title class="title-text">{{ article.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="detail-text" *ngIf="article.isDescriptionExpanded">
+      {{ article.description }}
+    </ion-card-content>
+    <div class="button-container">
+      <ion-button class="save-article" (click)="saveArticle(article)">Save Offline</ion-button>
+    </div>  
+  </ion-card>
+</ion-content>
